@@ -307,6 +307,33 @@ document.addEventListener('init', function (event) {
   if (page.id === 'signup') {
     console.log("signup");
 
+    $("#createbtn").click(function () {
+      var content = document.getElementById('content');
+      
+       var username = document.getElementById('username').value;
+              var password = document.getElementById('password').value;
+              firebase.auth().createUserWithEmailAndPassword(username, password).catch(function (error) {
+              // Handle Errors here.
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              ons.notification.alert(errorCode + ':' + errorMessage);
+          });
+          }
+          
+          firebase.auth().onAuthStateChanged(function (user) {
+              if (user) {
+                  // User is signed in.
+                  //Send user to home.html
+                  window.location.href = 'home.html';
+  
+              }
+          });
+
+      
+     
+    
+
+
     $("#backhomebtn").click(function () {
       var content = document.getElementById('content');
       content.load('login.html');
