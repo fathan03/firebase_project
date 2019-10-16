@@ -112,7 +112,7 @@ document.addEventListener('init', function (event) {
                  </div>
                  <div class="left list-item__left list-item--material__left" >
                      <img class="list-item__thumbnail list-item--material__thumbnail"
-                     style="background-image: u('${doc.data().url}')">
+                     style="background-image: url('${doc.data().url}')">
                  </div>
              
              </ons-list-item>
