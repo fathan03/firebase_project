@@ -262,9 +262,9 @@ document.addEventListener('init', function (event) {
     console.log("loginPage");
 
     $("#signinbtn").click(function () {
-      var username = $("#username").val();
+      var email = $("#email").val();
       var password = $("#password").val();
-      firebase.auth().signInWithEmailAndPassword(username, password).catch(function (error) {
+      firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
         ons.notification.alert('login filed')
         console.log(error.message);
       });
@@ -278,6 +278,7 @@ document.addEventListener('init', function (event) {
       });
 
     })
+
     $("#signupbtn").click(function () {
       var content = document.getElementById('content');
       content.load('signup.html');
@@ -308,31 +309,24 @@ document.addEventListener('init', function (event) {
     console.log("signup");
 
     $("#createbtn").click(function () {
-      var content = document.getElementById('content');
-      
-       var username = document.getElementById('username').value;
-              var password = document.getElementById('password').value;
-              firebase.auth().createUserWithEmailAndPassword(username, password).catch(function (error) {
+     
+      var email = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
+              firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
               // Handle Errors here.
               var errorCode = error.code;
               var errorMessage = error.message;
-              ons.notification.alert(errorCode + ':' + errorMessage);
-          });
-          }
-          
-          firebase.auth().onAuthStateChanged(function (user) {
-              if (user) {
-                  // User is signed in.
-                  //Send user to home.html
-                  window.location.href = 'home.html';
-  
+              
+              if(errorCode === 'auth/weak-password'){
+                alert('The password is too weak');
+              }else{
+                alert(errorMessage);
               }
+              console.log(error);
           });
-
-      
-     
-    
-
+          
+       
+        }); 
 
     $("#backhomebtn").click(function () {
       var content = document.getElementById('content');
