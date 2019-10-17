@@ -264,21 +264,23 @@ document.addEventListener('init', function (event) {
     $("#signinbtn").click(function () {
       var email = $("#email").val();
       var password = $("#password").val();
-      firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
+      firebase.auth().signInWithEmailAndPassword(email, password).then(function (){
+        content.load('home.html');
+
+      }
+      )
+      
+      .catch(function (error) {
         ons.notification.alert('login filed')
         console.log(error.message);
       });
 
-      firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-          // User is signed in
-          //send user to home.html
-          window.location.href = 'index.html';
-        }
-      });
+  
 
     })
 
+    
+  
     $("#signupbtn").click(function () {
       var content = document.getElementById('content');
       content.load('signup.html');
@@ -290,6 +292,30 @@ document.addEventListener('init', function (event) {
     });
   }
 
+  if (page.id === 'loginPage') {
+    console.log("loginPage");
+
+    $("#gbtn").click(function () {
+      var provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().signInWithPopup(provider).then(function(result) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = result.credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        content.load('home.html');
+      }).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+      });
+    });
+
+  }
 
   if (page.id === 'shop1') {
     console.log("shop1");
@@ -319,10 +345,13 @@ document.addEventListener('init', function (event) {
               
               if(errorCode === 'auth/weak-password'){
                 alert('The password is too weak');
+               
               }else{
                 alert(errorMessage);
+                content.load('login.html');
               }
               console.log(error);
+              
           });
           
        
