@@ -1628,7 +1628,7 @@ h4, h5, h6 {
   letter-spacing: 0;
   color: white;
   vertical-align: middle;
-  background-color: rgba(24, 103, 194, .81);
+ 
   border: 0 solid currentColor;
   border-radius: 3px;
   -webkit-transition: none;
@@ -1647,7 +1647,7 @@ h4, h5, h6 {
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0);
   text-transform: uppercase;
-  background-color: #009688;
+
   color: #ffffff;
   font-weight: 500;
   -webkit-transition: background-color 0.25s linear;

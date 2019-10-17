@@ -123,15 +123,10 @@ document.addEventListener('init', function (event) {
       });
     });
 
-    $("#changtab").click(function (name) {
-      localStorage.setItem('name', name);
-      document.getElementById('tabbar').setActiveTab(2);
-    });
-    
+
 
     $("#shops").click(function () {
-      var content = document.getElementById('content');
-      content.load('ListStarbuck.html');
+      content.load("ListStarbuck.html");
     });
 
   }
@@ -175,7 +170,7 @@ document.addEventListener('init', function (event) {
     style="background: rgb(255, 255, 255); border: 1px solid white; color: black; flex: 0 0 33%; max-width: 30%;"
     width="10%">
         <ons-list-item>
-                <ons-icon icon="fa-plus" style="color: rgb(31, 30, 30);"></ons-icon>
+                <ons-icon  icon="fa-plus" style="color: rgb(31, 30, 30);" onclick="addtocart"></ons-icon>
         </ons-list-item>
     </ons-col>
        `
@@ -218,7 +213,7 @@ document.addEventListener('init', function (event) {
     style="background: rgb(255, 255, 255); border: 1px solid white; color: black; flex: 0 0 33%; max-width: 30%;"
     width="10%">
         <ons-list-item>
-                <ons-icon icon="fa-plus" style="color: rgb(31, 30, 30);"></ons-icon>
+                <ons-icon  icon="fa-plus" style="color: rgb(31, 30, 30);" onclick="addtocart" ></ons-icon>
         </ons-list-item>
     </ons-col>
        `
@@ -270,23 +265,23 @@ document.addEventListener('init', function (event) {
     $("#signinbtn").click(function () {
       var email = $("#email").val();
       var password = $("#password").val();
-      firebase.auth().signInWithEmailAndPassword(email, password).then(function (){
+      firebase.auth().signInWithEmailAndPassword(email, password).then(function () {
         content.load('home.html');
 
       }
       )
-      
-      .catch(function (error) {
-        ons.notification.alert('login filed')
-        console.log(error.message);
-      });
 
-  
+        .catch(function (error) {
+          ons.notification.alert('login filed')
+          console.log(error.message);
+        });
+
+
 
     })
 
-    
-  
+
+
     $("#signupbtn").click(function () {
       var content = document.getElementById('content');
       content.load('signup.html');
@@ -303,13 +298,13 @@ document.addEventListener('init', function (event) {
 
     $("#gbtn").click(function () {
       var provider = new firebase.auth.GoogleAuthProvider();
-      firebase.auth().signInWithPopup(provider).then(function(result) {
+      firebase.auth().signInWithPopup(provider).then(function (result) {
         // This gives you a Google Access Token. You can use it to access the Google API.
         var token = result.credential.accessToken;
         // The signed-in user info.
         var user = result.user;
         content.load('home.html');
-      }).catch(function(error) {
+      }).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -341,27 +336,27 @@ document.addEventListener('init', function (event) {
     console.log("signup");
 
     $("#createbtn").click(function () {
-     
+
       var email = document.getElementById('email').value;
       var password = document.getElementById('password').value;
-              firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
-              // Handle Errors here.
-              var errorCode = error.code;
-              var errorMessage = error.message;
-              
-              if(errorCode === 'auth/weak-password'){
-                alert('The password is too weak');
-               
-              }else{
-                alert(errorMessage);
-                content.load('login.html');
-              }
-              console.log(error);
-              
-          });
-          
-       
-        }); 
+      firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+
+        if (errorCode === 'auth/weak-password') {
+          alert('The password is too weak');
+
+        } else {
+          alert(errorMessage);
+          content.load('login.html');
+        }
+        console.log(error);
+
+      });
+
+
+    });
 
     $("#backhomebtn").click(function () {
       var content = document.getElementById('content');
@@ -381,6 +376,42 @@ document.addEventListener('init', function (event) {
       var content = document.getElementById('content');
       content.load('cart1.html');
     });
+    
+   
+var cart = $(".cart");
+var cart_number = $(".cart_number");
+var close_id;
+
+$(".item").each(function(index){
+	$(this).click(function(e){
+		  e.stopPropagation();
+		  if ($('.dropdown').find('.dropdown-menu').is(":hidden")){
+			$('.dropdown-toggle').dropdown('toggle');
+		  }
+		 addToCart(index);
+	});
+});
+function addToCart(index){ // เพิ่มสินค้าลงตะกร้า
+	var html = '<li id="item'+index+'"><a onClick="removeFromCart('+index+')">iPhone '+index+' <small>remove</small></a></li>';
+	cart.append(html);
+	cart_number.text($(".cart li").length); // อัพเดทตัวเลขสินค้าใน cart
+	clearTimeout(close_id);
+	close_id = setTimeout(closeDropdown,1500); // ปิดการแสดงรายการสินค้าใน cart
+}
+function removeFromCart(index){ // ลบสินค้าจากตะกร้า
+	clearTimeout(close_id);
+	$("#item"+index).remove(); // ลบสินค้า
+	cart_number.text($(".cart li").length); // อัพเดทตัวเลขสินค้าใน cart เมื่อลบสินค้า
+}
+function closeDropdown(){
+	clearTimeout(close_id);
+	$('.dropdown-toggle').dropdown('toggle');	
+}
+
+
+
+
+
   }
 
 
