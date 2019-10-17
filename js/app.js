@@ -123,6 +123,12 @@ document.addEventListener('init', function (event) {
       });
     });
 
+    $("#changtab").click(function (name) {
+      localStorage.setItem('name', name);
+      document.getElementById('tabbar').setActiveTab(2);
+    });
+    
+
     $("#shops").click(function () {
       var content = document.getElementById('content');
       content.load('ListStarbuck.html');
