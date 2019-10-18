@@ -11,13 +11,6 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-// Initialize Firebase
-
-// Initialize Firebase
-
-// Initialize Firebase
-
-// Initialize Firebase
 
 
 var db = firebase.firestore();
@@ -94,7 +87,7 @@ document.addEventListener('init', function (event) {
 
 
     $("#shops").empty();
-    db.collection("shoplist").get().then((querySnapshot) => {
+    db.collection("shops").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
 
         var item1 = `
@@ -123,14 +116,11 @@ document.addEventListener('init', function (event) {
       });
     });
 
-
-
     $("#shops").click(function () {
       content.load("ListStarbuck.html");
     });
 
   }
-
 
   if (page.id === 'list') {
     console.log("list");
@@ -170,7 +160,7 @@ document.addEventListener('init', function (event) {
     style="background: rgb(255, 255, 255); border: 1px solid white; color: black; flex: 0 0 33%; max-width: 30%;"
     width="10%">
         <ons-list-item>
-                <ons-icon  icon="fa-plus" style="color: rgb(31, 30, 30);" onclick="addtocart"></ons-icon>
+                <ons-icon  icon="fa-plus" style="color: rgb(31, 30, 30);" ></ons-icon>
         </ons-list-item>
     </ons-col>
        `
@@ -213,7 +203,7 @@ document.addEventListener('init', function (event) {
     style="background: rgb(255, 255, 255); border: 1px solid white; color: black; flex: 0 0 33%; max-width: 30%;"
     width="10%">
         <ons-list-item>
-                <ons-icon  icon="fa-plus" style="color: rgb(31, 30, 30);" onclick="addtocart" ></ons-icon>
+                <ons-icon  icon="fa-plus" style="color: rgb(31, 30, 30);"  ></ons-icon>
         </ons-list-item>
     </ons-col>
        `
@@ -221,17 +211,7 @@ document.addEventListener('init', function (event) {
 
       });
     });
-
-
-
-
-
   }
-
-
-
-
-
 
   if (page.id === 'menuPage') {
     console.log("menuPage");
@@ -276,10 +256,7 @@ document.addEventListener('init', function (event) {
           console.log(error.message);
         });
 
-
-
-    })
-
+    });
 
 
     $("#signupbtn").click(function () {
@@ -339,21 +316,31 @@ document.addEventListener('init', function (event) {
 
       var email = document.getElementById('email').value;
       var password = document.getElementById('password').value;
-      firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+      firebase.auth().createUserWithEmailAndPassword(email, password).then(function (result) {
+        ons.notification.alert('Create Success')
+        content.load('login.html');
+      })
+      .catch(function (error) {
         // Handle Errors here.
+        
         var errorCode = error.code;
         var errorMessage = error.message;
-
+        
         if (errorCode === 'auth/weak-password') {
-          alert('The password is too weak');
+          ons.notification.alert('The password is too weak');
+          
 
         } else {
-          alert(errorMessage);
+         
+          ons.notification.alert(errorMessage);
           content.load('login.html');
         }
         console.log(error);
+       
 
       });
+      
+
 
 
     });
@@ -377,42 +364,7 @@ document.addEventListener('init', function (event) {
       content.load('cart1.html');
     });
     
-   
-var cart = $(".cart");
-var cart_number = $(".cart_number");
-var close_id;
-
-$(".item").each(function(index){
-	$(this).click(function(e){
-		  e.stopPropagation();
-		  if ($('.dropdown').find('.dropdown-menu').is(":hidden")){
-			$('.dropdown-toggle').dropdown('toggle');
-		  }
-		 addToCart(index);
-	});
-});
-function addToCart(index){ // เพิ่มสินค้าลงตะกร้า
-	var html = '<li id="item'+index+'"><a onClick="removeFromCart('+index+')">iPhone '+index+' <small>remove</small></a></li>';
-	cart.append(html);
-	cart_number.text($(".cart li").length); // อัพเดทตัวเลขสินค้าใน cart
-	clearTimeout(close_id);
-	close_id = setTimeout(closeDropdown,1500); // ปิดการแสดงรายการสินค้าใน cart
-}
-function removeFromCart(index){ // ลบสินค้าจากตะกร้า
-	clearTimeout(close_id);
-	$("#item"+index).remove(); // ลบสินค้า
-	cart_number.text($(".cart li").length); // อัพเดทตัวเลขสินค้าใน cart เมื่อลบสินค้า
-}
-function closeDropdown(){
-	clearTimeout(close_id);
-	$('.dropdown-toggle').dropdown('toggle');	
-}
-
-
-
-
-
-  }
+    }
 
 
   if (page.id === 'cart1') {
@@ -427,6 +379,5 @@ function closeDropdown(){
   }
 
 
-
-
 });
+

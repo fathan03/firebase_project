@@ -87,10 +87,7 @@ ons-bottom-toolbar {
   bottom: 0;
 }
 
-.page, .page__content {
-  background-color: transparent !important;
-  background: transparent !important;
-}
+
 
 .page__content {
   overflow: auto;
