@@ -1,29 +1,29 @@
-        <ons-page id="signup">
+        <ons-page  class="img" id="signup">
                 <center>
                 <div style="size: 50px">
-              <ons-card style="background-color: rgba(245, 246, 248, 0.699);width: 90%; height: 50%; margin-top: 30%; size: 50px">
+              <ons-card style="background-color: rgba(176, 246, 248, 0.11);width: 70%; height: 40%; margin-top: 25%; size: 50px;">
                   <center>
                       <p >
                         <ons-icon size="50px" icon="md-home"></ons-icon><br>
                       Sign-Up<br>
                       </p><br>
                     <p>
-                        <ons-icon icon="fa-user" style="color: grey;"> : </ons-icon>
+                        <ons-icon icon="fa-user" style="color: rgb(22, 22, 22);"> : </ons-icon>
                       <ons-input   id="username" placeholder="Username" modifier="underbar"></ons-input>
                     </p>
 
                     <p>
-                        <ons-icon icon="fa-user" style="color: grey;"> : </ons-icon>
+                        <ons-icon icon="fa-user" style="color: rgb(22, 22, 22);"> : </ons-icon>
                         <ons-input   id="email" placeholder="Email" modifier="underbar"></ons-input>
                       </p>
                  
                       <p>
-                          <ons-icon icon="fa-phone" style="color: grey;"> : </ons-icon>
+                          <ons-icon icon="fa-phone" style="color: rgb(22, 22, 22);"> : </ons-icon>
                           <ons-input   id="Phone" placeholder="Phone" modifier="underbar"></ons-input>
                         </p>
 
                     <p>
-                        <ons-icon icon="fa-key" style="color: grey;"> : </ons-icon>
+                        <ons-icon icon="fa-key" style="color: rgb(22, 22, 22);"> : </ons-icon>
                       <ons-input
                         id="password"
                         placeholder="Password"
@@ -31,12 +31,13 @@
                         modifier="underbar"
                       >
                       </ons-input>
-                    </p>
+                    </p><br>
                   
                                             
-                    <p>
-                        <ons-button  class="button--large--cta" style="width: auto; margin: 0 auto; background-color: rgba(231, 112, 76, 0.973) " id="createbtn">Create </ons-button>
-                    </p>
+                    
+          <p>
+              <a href="#" class="button instagram" id="createbtn"><span class="gradient"></span>Create User</a>
+            </p>
                       
                    
                   </center>
@@ -44,7 +45,7 @@
                  
                   </ons-card>
                   <center>
-                      <ons-row style="margin-top: 30px;color:navy">
+                      <ons-row style="margin-top: 30px;color:rgb(255, 255, 255)">
                           <ons-col>                            
                               <div id="backhomebtn"><ons-icon icon="fa-arrow-left"></ons-icon> Back to Homepage</div>  
                           </ons-col>
@@ -52,6 +53,83 @@
                 </div>
               </center>
                   
+
+
+
+
+              <style>
+                  .img{
+                    background-image: url("images/rain.jpg");
+                    filter: brightness(1.5);
+                    background-size: cover;
+                    
+                  }
+                  .button {
+	display: block;
+  width: 200px;
+  max-width: 100%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  overflow: hidden;
+  position: relative;
+  transform: translatez(0);
+  text-decoration: none;
+  box-sizing: border-box;
+  font-size: 16px;
+	font-weight: normal;
+	box-shadow: 0 9px 18px rgba(0, 0, 0, 0.219);
+}
+
+.instagram {
+	text-align: center;
+	border-radius: 50px;
+  padding: 3px;
+  color: rgb(255, 255, 255);
+  background: rgb(8, 136, 15);
+  transition: all 0.2s ease-out 0s;
+}
+
+.gradient {
+	display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  bottom: auto;
+  margin: auto;
+  z-index: -1;
+  background: radial-gradient(90px circle at top center, rgba(241, 243, 95, 0.993) 30%, rgba(255,255,255,0));
+  transition: all 0s ease-out 0s;
+	transform: translatex(-140px);
+	animation: 20s linear 0s infinite move;
+}
+
+@keyframes move {
+	0% {
+		transform: translatex(-140px);
+	}
+	25% {
+		transform: translatex(140px);
+		opacity: 0.2;
+	}
+	50% {
+		transform: translatex(140px);
+		opacity: 1;
+		background: radial-gradient(90px circle at bottom center, rgba(238,88,63,.5) 30%, rgba(255,255,255,0));
+	}
+	75% {
+		transform: translatex(-140px);
+		opacity: 0.2;
+	}
+	100% {
+		opacity: 1;
+		transform: translatex(-140px);
+		background: radial-gradient(90px circle at top center, rgba(238,88,63,.5) 30%, rgba(255,255,255,0));
+	}
+}
+
+              </style>
                   </ons-page>
 
 

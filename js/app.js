@@ -122,6 +122,7 @@ document.addEventListener('init', function (event) {
 
   }
 
+
   if (page.id === 'list') {
     console.log("list");
 
@@ -317,29 +318,29 @@ document.addEventListener('init', function (event) {
       var email = document.getElementById('email').value;
       var password = document.getElementById('password').value;
       firebase.auth().createUserWithEmailAndPassword(email, password).then(function (result) {
-        ons.notification.alert('Create Success')
+        ons.notification.alert('Create User Success')
         content.load('login.html');
       })
-      .catch(function (error) {
-        // Handle Errors here.
-        
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        
-        if (errorCode === 'auth/weak-password') {
-          ons.notification.alert('The password is too weak');
-          
+        .catch(function (error) {
+          // Handle Errors here.
 
-        } else {
-         
-          ons.notification.alert(errorMessage);
-          content.load('login.html');
-        }
-        console.log(error);
-       
+          var errorCode = error.code;
+          var errorMessage = error.message;
 
-      });
-      
+          if (errorCode === 'auth/weak-password') {
+            ons.notification.alert('The password is too weak');
+
+
+          } else {
+
+            ons.notification.alert(errorMessage);
+            content.load('login.html');
+          }
+          console.log(error);
+
+
+        });
+
 
 
 
@@ -363,8 +364,8 @@ document.addEventListener('init', function (event) {
       var content = document.getElementById('content');
       content.load('cart1.html');
     });
-    
-    }
+
+  }
 
 
   if (page.id === 'cart1') {
