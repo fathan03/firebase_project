@@ -571,8 +571,8 @@ ons.notification.toast('You have added a product ', {
 
 
 
- function displayCart(){
-  console.log('showcart');
+ function displayCart(){ 
+  
   console.log(dataCart);
 
   // db.collection("menu").where("name", "==", Data).get()
@@ -582,8 +582,7 @@ ons.notification.toast('You have added a product ', {
    apr = db.collection("menu").where("name", "==",dataCart)
   .get().then(function (listitem) {
       listitem.forEach((doc) => {
-
-                     
+                   
               var itemlist = `
               <ons-list>
                  
