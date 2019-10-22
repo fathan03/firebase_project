@@ -65,19 +65,8 @@ document.addEventListener('init', function (event) {
       });
     });
 
-
-    $("#Tbtn").click(function () {
-      var content = document.getElementById('content');
-      content.load('shop1.html');
-
-
-    });
-
-    $("#Isbtn").click(function () {
-      var content = document.getElementById('content');
-      content.load('shop1.html');
-
-
+    $("#allbtn").click(function () {
+      $("#content")[0].load("shop1.html");
     });
   }
 
@@ -85,13 +74,12 @@ document.addEventListener('init', function (event) {
   if (page.id === 'shop1') {
     console.log("shop1");
 
-
-    $("#shops").empty();
-    db.collection("shops").get().then((querySnapshot) => {
+    $("#shopss").empty();
+    db.collection("Starbuck").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
 
         var item1 = `
-        <ons-button id="listbtn" >
+        <ons-button id=${doc.data().idmenu} >
              <ons-list-item modifier="material" class="list-item list-item--material"
                  style="background-color: rgb(255, 255, 255);">
                  
@@ -111,27 +99,248 @@ document.addEventListener('init', function (event) {
              </ons-list-item>
          </ons-button>
        `
-        $("#shops").append(item1);
+        $("#shopss").append(item1);
+
+      });
+    });
+    $("#shopss1").empty();
+    db.collection("Yayoi").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+
+        var item11 = `
+          <ons-button id=${doc.data().idmenu} >
+               <ons-list-item modifier="material" class="list-item list-item--material"
+                   style="background-color: rgb(255, 255, 255);">
+                   
+                   <div class="center list-item__center list-item--material__center">
+                           
+                       <span class="list-item__title list-item--material__title" style="font-size: 15pt">${doc.data().name}</span>
+                       <span class="list-item__subtitle list-item--material__subtitle">&nbsp;
+                           <ons-icon icon="fa-star" size="15px" style="color: rgb(10, 10, 10);">${doc.data().distance}
+                           </ons-icon>
+                       </span>
+                   </div>
+                   <div class="left list-item__left list-item--material__left" >
+                       <img class="list-item__thumbnail list-item--material__thumbnail"
+                       style="background-image: url('${doc.data().url}')">
+                   </div>
+               
+               </ons-list-item>
+           </ons-button>
+         `
+        $("#shopss1").append(item11);
+
+      });
+    });
+    $("#shopss2").empty();
+    db.collection("Kfc").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+
+        var item22 = `
+          <ons-button id=${doc.data().idmenu} >
+               <ons-list-item modifier="material" class="list-item list-item--material"
+                   style="background-color: rgb(255, 255, 255);">
+                   
+                   <div class="center list-item__center list-item--material__center">
+                           
+                       <span class="list-item__title list-item--material__title" style="font-size: 15pt">${doc.data().name}</span>
+                       <span class="list-item__subtitle list-item--material__subtitle">&nbsp;
+                           <ons-icon icon="fa-star" size="15px" style="color: rgb(10, 10, 10);">${doc.data().distance}
+                           </ons-icon>
+                       </span>
+                   </div>
+                   <div class="left list-item__left list-item--material__left" >
+                       <img class="list-item__thumbnail list-item--material__thumbnail"
+                       style="background-image: url('${doc.data().url}')">
+                   </div>
+               
+               </ons-list-item>
+           </ons-button>
+         `
+        $("#shopss2").append(item22);
 
       });
     });
 
-    $("#shops").click(function () {
-      content.load("ListStarbuck.html");
+    $("#shopss3").empty();
+    db.collection("Swen").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+
+        var item33 = `
+          <ons-button id=${doc.data().idmenu} >
+               <ons-list-item modifier="material" class="list-item list-item--material"
+                   style="background-color: rgb(255, 255, 255);">
+                   
+                   <div class="center list-item__center list-item--material__center">
+                           
+                       <span class="list-item__title list-item--material__title" style="font-size: 15pt">${doc.data().name}</span>
+                       <span class="list-item__subtitle list-item--material__subtitle">&nbsp;
+                           <ons-icon icon="fa-star" size="15px" style="color: rgb(10, 10, 10);">${doc.data().distance}
+                           </ons-icon>
+                       </span>
+                   </div>
+                   <div class="left list-item__left list-item--material__left" >
+                       <img class="list-item__thumbnail list-item--material__thumbnail"
+                       style="background-image: url('${doc.data().url}')">
+                   </div>
+               
+               </ons-list-item>
+           </ons-button>
+         `
+        $("#shopss3").append(item33);
+
+      });
     });
 
+    $("#shopss4").empty();
+    db.collection("Mister").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+
+        var item44 = `
+          <ons-button id=${doc.data().idmenu} >
+               <ons-list-item modifier="material" class="list-item list-item--material"
+                   style="background-color: rgb(255, 255, 255);">
+                   
+                   <div class="center list-item__center list-item--material__center">
+                           
+                       <span class="list-item__title list-item--material__title" style="font-size: 15pt">${doc.data().name}</span>
+                       <span class="list-item__subtitle list-item--material__subtitle">&nbsp;
+                           <ons-icon icon="fa-star" size="15px" style="color: rgb(10, 10, 10);">${doc.data().distance}
+                           </ons-icon>
+                       </span>
+                   </div>
+                   <div class="left list-item__left list-item--material__left" >
+                       <img class="list-item__thumbnail list-item--material__thumbnail"
+                       style="background-image: url('${doc.data().url}')">
+                   </div>
+               
+               </ons-list-item>
+           </ons-button>
+         `
+        $("#shopss4").append(item44);
+
+      });
+    });
+
+
+
+    $("#backhomebtn").click(function () {
+      $("#content")[0].load("home.html");
+    });
+
+
+
+    $("#shopss").click(function () {
+      localStorage.setItem("selectedCategory", "1");
+      $("#content")[0].load("ListStarbuck.html");
+    });
+    $("#shopss1").click(function () {
+      localStorage.setItem("selectedCategory", "2");
+      $("#content")[0].load("ListStarbuck.html");
+    });
+
+    $("#shopss2").click(function () {
+      localStorage.setItem("selectedCategory", "3");
+      $("#content")[0].load("ListStarbuck.html");
+    });
+    $("#shopss3").click(function () {
+      localStorage.setItem("selectedCategory", "4");
+      $("#content")[0].load("ListStarbuck.html");
+    });
+    $("#shopss4").click(function () {
+      localStorage.setItem("selectedCategory", "5");
+      $("#content")[0].load("ListStarbuck.html");
+    });
   }
+
+  // if (page.id === 'shop1') {
+  //   console.log("shop1");
+
+  //   $("#shopss1").empty();
+  //   db.collection("Yayoi").get().then((querySnapshot) => {
+  //     querySnapshot.forEach((doc) => {
+
+  //       var item11 = `
+  //       <ons-button id=${doc.data().idmenu} >
+  //            <ons-list-item modifier="material" class="list-item list-item--material"
+  //                style="background-color: rgb(255, 255, 255);">
+
+  //                <div class="center list-item__center list-item--material__center">
+
+  //                    <span class="list-item__title list-item--material__title" style="font-size: 15pt">${doc.data().name}</span>
+  //                    <span class="list-item__subtitle list-item--material__subtitle">&nbsp;
+  //                        <ons-icon icon="fa-star" size="15px" style="color: rgb(10, 10, 10);">${doc.data().distance}
+  //                        </ons-icon>
+  //                    </span>
+  //                </div>
+  //                <div class="left list-item__left list-item--material__left" >
+  //                    <img class="list-item__thumbnail list-item--material__thumbnail"
+  //                    style="background-image: url('${doc.data().url}')">
+  //                </div>
+
+  //            </ons-list-item>
+  //        </ons-button>
+  //      `
+  //       $("#shopss1").append(item11);
+
+  //     });
+  //   });
+
+
+
+  //   $("#backhomebtn").click(function () {
+  //     $("#content")[0].load("home.html");
+  //   });
+
+
+
+  //   $("#shopss1").click(function () {
+  //     localStorage.setItem("selectedCategory", "2");
+  //     $("#content")[0].load("ListStarbuck.html");
+  //   });
+  //   }
+
 
 
   if (page.id === 'list') {
     console.log("list");
+    var category = localStorage.getItem("selectedCategory");
+    console.log("categoryPage:" + category);
+
+    $("#head").empty();
+    db.collection("shops").where("idmenu", "==", category).get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          var item2 = `
+        <ons-list-item modifier="material" class="list-item list-item--material"
+        style="background-color: rgb(255, 255, 255);">
+
+        <div class="center list-item__center list-item--material__center">
+
+            <span class="list-item__title list-item--material__title" style="font-size: 15pt">&nbsp;&nbsp; ${doc.data().name}</span>
+            <span class="list-item__subtitle list-item--material__subtitle">&nbsp;
+                <ons-icon icon="fa-star" size="15px" style="color: rgb(10, 10, 10);">${doc.data().distance}
+                </ons-icon>
+            </span>
+        </div>
+        <div class="left list-item__left list-item--material__left">
+            <img class="list-item__thumbnail list-item--material__thumbnail"
+            style="background-image: url('${doc.data().url}')">
+        </div>
+
+    </ons-list-item>
+       `
+          $("#head").append(item2);
+
+        });
+      });
 
 
     $("#drink").empty();
-    db.collection("MenuStarbuck").get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-
-        var item2 = `
+    db.collection("menu").where("idmenu", "==", category).get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          var item3 = `
         <ons-col
         style="background: rgb(255, 255, 255); border: 1px solid white; color: black; flex: 0 0 33%; max-width: 40%;"
         width="20%">
@@ -165,53 +374,12 @@ document.addEventListener('init', function (event) {
         </ons-list-item>
     </ons-col>
        `
-        $("#drink").append(item2);
+          $("#drink").append(item3);
 
+        });
       });
-    });
 
-    $("#food").empty();
-    db.collection("FoodStarbuck").get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
 
-        var item3 = `
-        <ons-col
-        style="background: rgb(255, 255, 255); border: 1px solid white; color: black; flex: 0 0 33%; max-width: 40%;"
-        width="20%">
-            <ons-list-item>
-                    <div class="left list-item__left list-item--material__left">
-                            <img class="list-item__thumbnail list-item--material__thumbnail"
-                            style="background-image: url('${doc.data().url}')">
-                        </div>
-            </ons-list-item>
-        </ons-col>
-       
-    <ons-col
-    style="background: rgb(255, 255, 255); border: 1px solid white; color: black; flex: 0 0 33%; max-width: 40%;"
-    width="50%">
-        <ons-list-item>
-        ${doc.data().name}
-        </ons-list-item>
-    </ons-col>
-
-    <ons-col
-    style="background: rgb(255, 255, 255); border: 1px solid white; color: black; flex: 0 0 33%; max-width: 30%;"
-    width="20%">
-        <ons-list-item style="text-align: right;color: black">$${doc.data().price}</ons-list-item>
-    </ons-col>
-
-    <ons-col
-    style="background: rgb(255, 255, 255); border: 1px solid white; color: black; flex: 0 0 33%; max-width: 30%;"
-    width="10%">
-        <ons-list-item>
-                <ons-icon  icon="fa-plus" style="color: rgb(31, 30, 30);"  ></ons-icon>
-        </ons-list-item>
-    </ons-col>
-       `
-        $("#food").append(item3);
-
-      });
-    });
   }
 
   if (page.id === 'menuPage') {
@@ -299,14 +467,15 @@ document.addEventListener('init', function (event) {
   if (page.id === 'shop1') {
     console.log("shop1");
 
-    $("#listbtn").click(function () {
-      var content = document.getElementById('content');
-      content.load('ListStarbuck.html');
-    });
 
     $("#backbtn").click(function () {
       var content = document.getElementById('content');
       content.load('home.html');
+
+
+
+
+
     });
 
   }
