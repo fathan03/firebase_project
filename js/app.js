@@ -39,7 +39,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 document.addEventListener('init', function (event) {
   var page = event.target;
-
+  
 
 
   if (page.id === 'homePage') {
@@ -253,55 +253,7 @@ document.addEventListener('init', function (event) {
     });
   }
 
-  // if (page.id === 'shop1') {
-  //   console.log("shop1");
-
-  //   $("#shopss1").empty();
-  //   db.collection("Yayoi").get().then((querySnapshot) => {
-  //     querySnapshot.forEach((doc) => {
-
-  //       var item11 = `
-  //       <ons-button id=${doc.data().idmenu} >
-  //            <ons-list-item modifier="material" class="list-item list-item--material"
-  //                style="background-color: rgb(255, 255, 255);">
-
-  //                <div class="center list-item__center list-item--material__center">
-
-  //                    <span class="list-item__title list-item--material__title" style="font-size: 15pt">${doc.data().name}</span>
-  //                    <span class="list-item__subtitle list-item--material__subtitle">&nbsp;
-  //                        <ons-icon icon="fa-star" size="15px" style="color: rgb(10, 10, 10);">${doc.data().distance}
-  //                        </ons-icon>
-  //                    </span>
-  //                </div>
-  //                <div class="left list-item__left list-item--material__left" >
-  //                    <img class="list-item__thumbnail list-item--material__thumbnail"
-  //                    style="background-image: url('${doc.data().url}')">
-  //                </div>
-
-  //            </ons-list-item>
-  //        </ons-button>
-  //      `
-  //       $("#shopss1").append(item11);
-
-  //     });
-  //   });
-
-
-
-  //   $("#backhomebtn").click(function () {
-  //     $("#content")[0].load("home.html");
-  //   });
-
-
-
-  //   $("#shopss1").click(function () {
-  //     localStorage.setItem("selectedCategory", "2");
-  //     $("#content")[0].load("ListStarbuck.html");
-  //   });
-  //   }
-
-
-
+ 
   if (page.id === 'list') {
     console.log("list");
     var category = localStorage.getItem("selectedCategory");
@@ -370,7 +322,7 @@ document.addEventListener('init', function (event) {
     style="background: rgb(255, 255, 255); border: 1px solid white; color: black; flex: 0 0 33%; max-width: 30%;"
     width="10%">
         <ons-list-item>
-                <ons-icon  icon="fa-plus" style="color: rgb(31, 30, 30);" ></ons-icon>
+                <ons-icon  icon="fa-plus" onClick="add('${doc.data().name}')"  style="color: rgb(31, 30, 30);" ></ons-icon>
         </ons-list-item>
     </ons-col>
        `
@@ -381,6 +333,74 @@ document.addEventListener('init', function (event) {
 
 
   }
+
+  if (page.id === 'cart1') {
+    console.log("cart1");
+        
+    var category = localStorage.getItem("selectedCategory");
+    console.log("categoryPage:" + category);
+
+    $("#headcart").empty();
+    db.collection("shops").where("idmenu", "==", category).get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          var itemcart = `
+          
+          <img style="background-image: url('${doc.data().url}');width: 10%" >   
+          <p>${doc.data().name}</p>
+        
+         
+       `
+          $("#headcart").append(itemcart);
+
+        });
+      });
+
+
+    $("#cartdetail").empty();
+
+    localStorage.setItem('additem',name);
+    var Data = localStorage.getItem("additem");
+    
+    
+    db.collection("menu").where("name", "==", Data).get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          var itemmenu = `
+          <ons-list>
+             
+           <div id="cartdetail"> 
+         <ons-row>
+              <ons-col>
+                      <ons-list-item >${doc.data().name}</ons-list-item>
+              </ons-col>
+              <ons-col>
+                      <ons-list-header style="text-align: right;color: black; margin-top: 10px;">$${doc.data().price}</ons-list-header> 
+              </ons-col>
+          </ons-row>
+  
+                          </div>                                    
+  
+      <ons-list><center>
+        
+         
+       `
+          $("#cartdetail").append(itemmenu);
+         
+
+        });
+      
+      });
+     
+
+  }
+
+
+
+
+
+
+
 
   if (page.id === 'menuPage') {
     console.log("menuPage");
@@ -531,9 +551,12 @@ document.addEventListener('init', function (event) {
 
     $("#cfbtn").click(function () {
       var content = document.getElementById('content');
+      var category = localStorage.getItem("selectedCategory");
+      console.log("categoryPage:" + category);
       content.load('cart1.html');
     });
 
+    
   }
 
 
@@ -549,5 +572,25 @@ document.addEventListener('init', function (event) {
   }
 
 
+
+
+
 });
+
+
+function add(name){
+ 
+localStorage.setItem('additem',name);
+var Data = localStorage.getItem("additem");
+console.log(Data);
+dataCart.push(Data);
+ons.notification.toast('You have added a product ', {
+  timeout: 1000});
+
+  
+ 
+} 
+
+
+
 
