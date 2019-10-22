@@ -334,66 +334,45 @@ document.addEventListener('init', function (event) {
 
   }
 
-  if (page.id === 'cart1') {
-    console.log("cart1");
-        
-    var category = localStorage.getItem("selectedCategory");
-    console.log("categoryPage:" + category);
+  
 
-    $("#headcart").empty();
-    db.collection("shops").where("idmenu", "==", category).get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          var itemcart = `
-          
-          <img style="background-image: url('${doc.data().url}');width: 10%" >   
-          <p>${doc.data().name}</p>
-        
-         
-       `
-          $("#headcart").append(itemcart);
+    // $("#cartdetail").empty();
 
-        });
-      });
-
-
-    $("#cartdetail").empty();
-
-    localStorage.setItem('additem',name);
-    var Data = localStorage.getItem("additem");
+    // localStorage.setItem('additem',name);
+    // var Data = localStorage.getItem("additem");
     
     
-    db.collection("menu").where("name", "==", Data).get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          var itemmenu = `
-          <ons-list>
+    // db.collection("menu").where("name", "==", Data).get()
+    //   .then((querySnapshot) => {
+    //     querySnapshot.forEach((doc) => {
+    //       var itemmenu = `
+    //       <ons-list>
              
-           <div id="cartdetail"> 
-         <ons-row>
-              <ons-col>
-                      <ons-list-item >${doc.data().name}</ons-list-item>
-              </ons-col>
-              <ons-col>
-                      <ons-list-header style="text-align: right;color: black; margin-top: 10px;">$${doc.data().price}</ons-list-header> 
-              </ons-col>
-          </ons-row>
+    //        <div id="cartdetail"> 
+    //      <ons-row>
+    //           <ons-col>
+    //                   <ons-list-item >${doc.data().name}</ons-list-item>
+    //           </ons-col>
+    //           <ons-col>
+    //                   <ons-list-header style="text-align: right;color: black; margin-top: 10px;">$${doc.data().price}</ons-list-header> 
+    //           </ons-col>
+    //       </ons-row>
   
-                          </div>                                    
+    //                       </div>                                    
   
-      <ons-list><center>
+    //   <ons-list><center>
         
          
-       `
-          $("#cartdetail").append(itemmenu);
+    //    `
+    //       $("#cartdetail").append(itemmenu);
          
 
-        });
+    //     });
       
-      });
+    //   });
      
 
-  }
+  
 
 
 
@@ -577,19 +556,71 @@ document.addEventListener('init', function (event) {
 
 });
 
-
+var dataCart = [];
 function add(name){
  
 localStorage.setItem('additem',name);
 var Data = localStorage.getItem("additem");
 console.log(Data);
 dataCart.push(Data);
+
 ons.notification.toast('You have added a product ', {
   timeout: 1000});
+  displayCart();
+ } 
 
+
+
+ function displayCart(){
+  console.log('showcart');
+  console.log(dataCart);
+
+  // db.collection("menu").where("name", "==", Data).get()
+  // //   .then((querySnapshot) => {
+  // //     querySnapshot.forEach((doc) => {
+   dataCart.forEach(function(dataCart){
+   apr = db.collection("menu").where("name", "==",dataCart)
+  .get().then(function (listitem) {
+      listitem.forEach((doc) => {
+
+                     
+              var itemlist = `
+              <ons-list>
+                 
+               <div id="cartdetail"> 
+             <ons-row>
+                  <ons-col>
+                          <ons-list-item >${doc.data().name}</ons-list-item>
+                  </ons-col>
+                  <ons-col>
+                          <ons-list-header style="text-align: right;color: black; margin-top: 10px;">$${doc.data().price}</ons-list-header> 
+                  </ons-col>
+              </ons-row>
+      
+                              </div>                                    
+      
+          <ons-list><center>
+            
+             
+           `
+              $("cartdetail").append(itemlist);
+
+        
+             
+    
+            });
+          
+          });
+      
+      
+     
+        
+    
+    })
   
+    
  
-} 
+}
 
 
 
